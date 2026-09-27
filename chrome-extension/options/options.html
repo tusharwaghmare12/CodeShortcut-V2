@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CodeShortcut Options & Settings</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <div class="options-layout">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="brand">
+        <img src="../icons/icon48.png" alt="CodeShortcut" class="logo">
+        <div>
+          <h2>CodeShortcut</h2>
+          <span class="version">v1.0.0</span>
+        </div>
+      </div>
+      <nav class="nav-menu">
+        <a href="#snippetsSection" class="nav-item active">
+          <span>⚡</span> Snippet Library
+        </a>
+        <a href="#sitesSection" class="nav-item">
+          <span>🌐</span> Site Compatibility
+        </a>
+        <a href="#debugSection" class="nav-item">
+          <span>🐞</span> Debug & System
+        </a>
+        <a href="#guideSection" class="nav-item">
+          <span>📚</span> ${CURSOR} & Dynamic Guide
+        </a>
+      </nav>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="content">
+      <!-- Snippets Section -->
+      <section id="snippetsSection" class="section">
+        <div class="section-header">
+          <div>
+            <h2>Snippet Library</h2>
+            <p>Manage, search, edit, create, or import/export your competitive programming snippets.</p>
+          </div>
+          <div class="action-buttons">
+            <button id="addSnippetBtn" class="btn btn-primary">+ Add Snippet</button>
+            <button id="exportBtn" class="btn btn-secondary">Export JSON</button>
+            <button id="importBtn" class="btn btn-secondary">Import JSON</button>
+            <button id="resetDefaultsBtn" class="btn btn-danger-outline">Reset Defaults</button>
+          </div>
+        </div>
+
+        <input type="file" id="importFileInput" accept=".json" style="display: none;">
+
+        <div class="filter-bar">
+          <input type="text" id="searchInput" placeholder="Search shortcuts, descriptions, or code content...">
+        </div>
+
+        <div class="snippets-grid" id="snippetsGrid">
+          <!-- Rendered snippet cards -->
+        </div>
+      </section>
+
+      <!-- Site Compatibility Section -->
+      <section id="sitesSection" class="section">
+        <div class="section-header">
+          <div>
+            <h2>Website Compatibility</h2>
+            <p>Toggle CodeShortcut trigger interception for specific online judges, competitive programming platforms, and text editors.</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="sites-grid" id="sitesGrid">
+            <!-- Rendered site checkboxes -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Debug & System Section -->
+      <section id="debugSection" class="section">
+        <div class="section-header">
+          <div>
+            <h2>Debug & System Mode</h2>
+            <p>Enable developer console logs for debugging shortcut triggers, editor detection, and cursor placement.</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="toggle-row">
+            <div>
+              <h3>Developer Debug Mode</h3>
+              <p class="help-text">Logs event details (shortcut detected, cursor placement, editor type) to the F12 Console.</p>
+            </div>
+            <label class="toggle-switch">
+              <input type="checkbox" id="debugModeToggle">
+              <span class="slider"></span>
+            </label>
+          </div>
+        </div>
+      </section>
+
+      <!-- Guide Section -->
+      <section id="guideSection" class="section">
+        <div class="section-header">
+          <div>
+            <h2>${CURSOR} & Dynamic Shortcuts Guide</h2>
+            <p>Learn how cursor placement and dynamic <code>pb</code> / <code>pp</code> shortcuts work in CodeShortcut.</p>
+          </div>
+        </div>
+        <div class="card guide-card">
+          <h3>1. ${CURSOR} Cursor Placement</h3>
+          <p>Use <code>${CURSOR}</code> inside any snippet template to specify where the cursor should land after pressing <kbd>TAB</kbd>.</p>
+          
+          <pre class="code-block">for(int i = 0; i < n; i++){\n    ${CURSOR}\n}</pre>
+
+          <h4>2. Dynamic <code>pb</code> and <code>pp</code> Shortcuts</h4>
+          <p>You can append <code>pb</code> or <code>pp</code> to any expression to automatically generate method calls:</p>
+          
+          <ul class="guide-list">
+            <li><code>apb</code> + <kbd>TAB</kbd> &rarr; <code>a.push_back(|);</code></li>
+            <li><code>vpb</code> + <kbd>TAB</kbd> &rarr; <code>v.push_back(|);</code></li>
+            <li><code>cpp</code> + <kbd>TAB</kbd> &rarr; <code>c.pop_back(|);</code></li>
+            <li><code>arrpp</code> + <kbd>TAB</kbd> &rarr; <code>arr.pop_back(|);</code></li>
+          </ul>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Add / Edit Modal -->
+  <div id="snippetModal" class="modal-overlay hidden">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="modalTitle">Add New Snippet</h3>
+        <button id="closeModalBtn" class="btn-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="modalShortcut">Shortcut Trigger <span class="required">*</span></label>
+          <input type="text" id="modalShortcut" placeholder="e.g. fo, fn, ci" required>
+        </div>
+        <div class="form-group">
+          <label for="modalDescription">Description</label>
+          <input type="text" id="modalDescription" placeholder="e.g. C++ for loop">
+        </div>
+        <div class="form-group">
+          <label for="modalBody">Snippet Body <span class="required">*</span></label>
+          <textarea id="modalBody" rows="8" placeholder="for(int i = 0; i < n; i++){\n    ${CURSOR}\n}" required></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="cancelModalBtn" class="btn btn-secondary">Cancel</button>
+        <button id="saveSnippetBtn" class="btn btn-primary">Save Snippet</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div id="toast" class="toast hidden"></div>
+
+  <!-- Scripts -->
+  <script src="../data/defaultSnippets.js"></script>
+  <script src="../utils/snippetParser.js"></script>
+  <script src="../utils/storage.js"></script>
+  <script src="options.js"></script>
+</body>
+</html>

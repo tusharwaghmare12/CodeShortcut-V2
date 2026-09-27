@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CodeShortcut</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="popup-container">
+    <!-- Top Header -->
+    <header class="header">
+      <div class="brand">
+        <img src="../icons/icon48.png" alt="CodeShortcut" class="logo">
+        <div class="brand-text">
+          <h1>CodeShortcut</h1>
+          <span class="version">v1.0.0</span>
+        </div>
+      </div>
+      <div class="header-actions">
+        <label class="toggle-switch" title="Enable / Disable CodeShortcut globally">
+          <input type="checkbox" id="globalToggle" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+    </header>
+
+    <!-- Search & Quick Action Toolbar -->
+    <div class="toolbar">
+      <div class="search-box">
+        <svg class="search-icon" viewBox="0 0 24 24" width="16" height="16">
+          <path fill="currentColor" d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+        </svg>
+        <input type="text" id="searchInput" placeholder="Search shortcuts, code, or description...">
+      </div>
+      <button id="addSnippetBtn" class="btn btn-primary" title="Add a new custom snippet">
+        <span>+</span> Add Snippet
+      </button>
+    </div>
+
+    <!-- Quick Actions Bar -->
+    <div class="quick-actions">
+      <button id="exportBtn" class="btn btn-secondary btn-sm">Export JSON</button>
+      <button id="importBtn" class="btn btn-secondary btn-sm">Import JSON</button>
+      <button id="resetDefaultsBtn" class="btn btn-secondary btn-sm btn-danger-hover">Reset Defaults</button>
+      <a href="../options/options.html" target="_blank" class="btn btn-link btn-sm" id="openOptionsBtn">Full Options ↗</a>
+    </div>
+
+    <input type="file" id="importFileInput" accept=".json" style="display: none;">
+
+    <!-- Snippets Count & List -->
+    <div class="section-title">
+      <span>Active Snippets (<span id="snippetCount">0</span>)</span>
+    </div>
+
+    <div class="snippets-list" id="snippetsList">
+      <!-- Dynamic Snippet Cards rendered here -->
+    </div>
+
+    <!-- Empty Search State -->
+    <div id="emptyState" class="empty-state hidden">
+      <p>No matching snippets found.</p>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast hidden"></div>
+  </div>
+
+  <!-- Add / Edit Snippet Modal -->
+  <div id="snippetModal" class="modal-overlay hidden">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="modalTitle">Add New Snippet</h3>
+        <button id="closeModalBtn" class="btn-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="modalShortcut">Shortcut Trigger <span class="required">*</span></label>
+          <input type="text" id="modalShortcut" placeholder="e.g. fo, fn, ci" required>
+          <small>The short trigger text typed before pressing TAB.</small>
+        </div>
+        <div class="form-group">
+          <label for="modalDescription">Description</label>
+          <input type="text" id="modalDescription" placeholder="e.g. C++ for loop">
+        </div>
+        <div class="form-group">
+          <label for="modalBody">Snippet Body <span class="required">*</span></label>
+          <textarea id="modalBody" rows="6" placeholder="for(int i = 0; i < n; i++){\n    ${CURSOR}\n}" required></textarea>
+          <small>Use <code>${CURSOR}</code> to define the target cursor position.</small>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="cancelModalBtn" class="btn btn-secondary">Cancel</button>
+        <button id="saveSnippetBtn" class="btn btn-primary">Save Snippet</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts loaded in order -->
+  <script src="../data/defaultSnippets.js"></script>
+  <script src="../utils/snippetParser.js"></script>
+  <script src="../utils/storage.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

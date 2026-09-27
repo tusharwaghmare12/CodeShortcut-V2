@@ -1,0 +1,86 @@
+[ci]
+cin >> ${CURSOR};
+
+[co]
+cout << "${CURSOR}";
+
+[fo]
+for(int i = 0; i < n; i++){
+    ${CURSOR}
+}
+
+[if]
+if(${CURSOR}){
+
+}
+
+[wh]
+while(${CURSOR}){
+
+}
+
+[t]
+int t;
+cin >> t;
+
+while(t--){
+    ${CURSOR}
+}
+
+[vpb]
+v.push_back();
+${CURSOR}
+
+[ve]
+vector<int> ${CURSOR};
+
+[so]
+sort(${CURSOR}.begin(), ${CURSOR}.end());
+
+[sz]
+${CURSOR}.size();
+
+[um]
+unordered_map<int, int> ${CURSOR};
+
+[pq]
+priority_queue<int> ${CURSOR};
+
+[ll]
+long long ${CURSOR};
+
+[else]
+else{
+    ${CURSOR}
+}
+
+[ife]
+if(${CURSOR}){
+
+}
+else{
+
+}
+
+[sw]
+switch(${CURSOR}){
+
+}
+
+[fn]
+void ${CURSOR}(){
+
+}
+
+[ret]
+return ${CURSOR};
+
+[br]
+break;
+
+[ct]
+continue;
+
+[in]
+int ${CURSOR};
+cin >> ${CURSOR};

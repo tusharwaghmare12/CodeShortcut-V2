@@ -1,0 +1,37 @@
+# CodeShortcut Git Ignore Configuration
+
+# Executables & Binaries
+*.exe
+*.dll
+*.so
+*.dylib
+*.bin
+
+# Compiled Object Files
+*.o
+*.obj
+
+# Build Directories & Logs
+build/
+Debug/
+Release/
+*.log
+
+# IDE & Editor Configuration Files
+.vscode/
+.idea/
+*.suo
+*.user
+*.userosv
+*.sln.docstates
+
+# Node.js & Package Managers
+node_modules/
+dist/
+package-lock.json
+
+# Operating System & Temporary Files
+.DS_Store
+Thumbs.db
+*.tmp
+scratch/
